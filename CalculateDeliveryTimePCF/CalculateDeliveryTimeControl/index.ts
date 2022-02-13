@@ -1,4 +1,7 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import AddressInput from "./components/AddressInput";
 
 export class CalculateDeliveryTimeControl implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
@@ -21,11 +24,12 @@ export class CalculateDeliveryTimeControl implements ComponentFramework.Standard
 	 * @param container If a control is marked control-type='standard', it will receive an empty div element within which it can render its content.
 	 */
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement): void {
-		this._container = document.createElement("div");
-		this._labelElement = document.createElement("label");
-		this._labelElement.innerHTML = "This is my PCF component";
-		this._container.appendChild(this._labelElement);
-		container.appendChild(this._container);
+		// this._container = document.createElement("div");
+		// this._labelElement = document.createElement("label");
+		// this._labelElement.innerHTML = "This is my PCF component";
+		// this._container.appendChild(this._labelElement);
+		// container.appendChild(this._container);
+		this._container = container;
 	}
 
 
@@ -34,7 +38,7 @@ export class CalculateDeliveryTimeControl implements ComponentFramework.Standard
 	 * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void {
-		// Add code to update control view
+		ReactDOM.render(React.createElement(AddressInput, { testStringVariable: "testStringInput", context: context }), this._container);
 	}
 
 	/**
